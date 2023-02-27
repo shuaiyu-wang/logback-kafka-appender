@@ -6,6 +6,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import org.example.appender.serializer.ThrowableProxyJsonSerializer;
+import org.example.appender.util.TimeUtil;
 
 public class JsonFormatter implements Formatter {
     private static final String QUOTE = "\"";
@@ -40,6 +41,9 @@ public class JsonFormatter implements Formatter {
         sb.append(COMMA);
         fieldName("timestamp", sb);
         sb.append(event.getTimeStamp());
+        sb.append(COMMA);
+        fieldName("date", sb);
+        quote(TimeUtil.getDateString(), sb);
         sb.append(COMMA);
         fieldName("message", sb);
         if (this.expectJson) {
